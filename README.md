@@ -145,21 +145,14 @@ Após a execução, os resultados são gerados na pasta /results. O Robot Framew
 
 ## Execução dos testes
 
-* Feature WEB
-<img width="828" height="281" alt="web" src="https://github.com/user-attachments/assets/9d9f6ad5-8999-47c1-a035-91d4b34e79b7" />
+![Execução dos Testes - Feature WEB]<img width="828" height="281" alt="web" src="https://github.com/user-attachments/assets/9d9f6ad5-8999-47c1-a035-91d4b34e79b7" />
 
+![Execução dos Testes - Feature API]<img width="822" height="309" alt="api" src="https://github.com/user-attachments/assets/042cd20f-83ee-4fe5-95d7-837aceb89602" />
 
-* Feature API
-<img width="822" height="309" alt="api" src="https://github.com/user-attachments/assets/042cd20f-83ee-4fe5-95d7-837aceb89602" />
+![Relatório]<img width="869" height="826" alt="relatório" src="https://github.com/user-attachments/assets/6983b93b-8667-4844-8332-5a38da6a7d9f" />
 
+![LOG]<img width="1875" height="919" alt="log" src="https://github.com/user-attachments/assets/7e8a3d05-43f9-476c-b535-eb98716d07fa" />
 
-* Relatório
-<img width="869" height="826" alt="relatório" src="https://github.com/user-attachments/assets/6983b93b-8667-4844-8332-5a38da6a7d9f" />
+![Git Actions]<img width="1867" height="962" alt="gitActions" src="https://github.com/user-attachments/assets/dcbec19b-066e-4b29-9a21-e2f2ced3af2d" />
 
-
-* LOG
-<img width="1875" height="919" alt="log" src="https://github.com/user-attachments/assets/7e8a3d05-43f9-476c-b535-eb98716d07fa" />
-
-
-* Git Actions
-<img width="1867" height="962" alt="gitActions" src="https://github.com/user-attachments/assets/dcbec19b-066e-4b29-9a21-e2f2ced3af2d" />
+![Execução dos Testes](demo_execucao.gif)
