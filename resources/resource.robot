@@ -4,7 +4,7 @@ Library    SeleniumLibrary
 *** Variables ***
 ${BROWSER}           chrome
 ${URL}               https://blogdoagi.com.br/
-${MENSAGEM_ERRO}     xpath=//p[contains(text(), 'Lamentamos, mas nada foi encontrado')]
+${MENSAGEM_ERRO}     xpath=//p[contains(normalize-space(), 'Lamentamos, mas nada foi encontrado')]
 
 *** Keywords ***
 ### Setup e Teardown 
@@ -47,6 +47,6 @@ Então o sistema deve exibir o artigo exato relacionado ao termo
 
 # Aqui retorna os dados da busca no step negativa
 Então deve ser exibido a mensagem "Lamentamos, mas nada foi encontrado"
-    Wait Until Element Is Visible    ${MENSAGEM_ERRO}    10s
+    Wait Until Element Is Visible    ${MENSAGEM_ERRO}    timeout=15s
     Element Should Be Visible        ${MENSAGEM_ERRO}
     Capture Page Screenshot          evidencias/busca_negativa_resultados.png
