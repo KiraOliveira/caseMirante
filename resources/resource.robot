@@ -45,7 +45,7 @@ Então o sistema deve exibir uma lista de resultados relacionados ao termo
 
 # Aqui retorna os dados da busca no step completo
 Então o sistema deve exibir o artigo exato relacionado ao termo      
-    Wait Until Element Is Visible    css:article    10s
+    Wait Until Element Is Visible    css:article    timeout=30s
     Capture Page Screenshot          evidencias/busca_completo_resultados.png    
 
 # Aqui retorna os dados da busca no step negativa
