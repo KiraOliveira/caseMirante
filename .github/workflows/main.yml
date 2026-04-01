@@ -45,8 +45,6 @@ jobs:
       - name: Executar Testes Robot (Safari - MacOS)
         if: matrix.os == 'macos-latest'
         run: |
-          # Pequeno delay para garantir que o SafariDriver iniciou os serviços de rede
-          sleep 5
           robot -d results -v BROWSER:${{ matrix.browser }} tests/
 
       - name: Upload de Evidências (Screenshots e Reports)

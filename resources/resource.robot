@@ -50,8 +50,12 @@ Então o sistema deve exibir o artigo exato relacionado ao termo
 
 # Aqui retorna os dados da busca no step negativa
 Então deve ser exibido a mensagem "Lamentamos, mas nada foi encontrado"
-    Unselect Frame
-    Wait Until Page Contains            Lamentamos, mas nada foi encontrado        timeout=30s
-    Wait Until Element Is Visible       css=section.no-results    timeout=10s   
+    IF    '${BROWSER}' == 'safari'
+        Sleep    5s
+        Select Window    main
+    END
+    Wait For Condition                  return document.readyState == "complete"    timeout=20s
+    Wait Until Page Contains            Lamentamos, mas nada foi encontrado         timeout=30s
+    Wait Until Element Is Visible       css=section.no-results                      timeout=10s   
     Element Should Be Visible           ${MENSAGEM_ERRO}
-    Capture Page Screenshot             evidencias/busca_negativa_resultados.png
+    Capture Page Screenshot             evidencias/busca_negativa_${BROWSER}.png
