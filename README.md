@@ -8,9 +8,9 @@
 ## 📋 Estrutura do Projeto
 O projeto está dividido em duas frentes principais:
 
-1. Web Automation: Validação de funcionalidades de busca no Blog do Agi.
+1. Web Automation: Validação de funcionalidades de busca no [Blog do Agi](https://blogdoagi.com.br/).
 
-2. API Automation: Validação de endpoints da Dog API.
+2. API Automation: Validação de endpoints da [Dog API](https://dog.ceo/dog-api/documentation/).
 
 ---
 
@@ -144,7 +144,7 @@ Após a execução, os resultados são gerados na pasta /results. O Robot Framew
 **Gislaine Oliveira** * | Foco em QA e Automação.*
 
 ## Execução dos testes
-[![Feature WEB]]<img width="708" height="367" alt="webLocal" src="https://github.com/user-attachments/assets/b536e29f-1a24-4df2-b4a4-e510dc8c08dc" />
+[![Feature WEB]](https://github.com/user-attachments/assets/b536e29f-1a24-4df2-b4a4-e510dc8c08dc)
 
 [![Feature API]]
 
