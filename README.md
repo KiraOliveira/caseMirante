@@ -68,7 +68,7 @@ Validação detalhada de estruturas JSON e Status Codes.
 
 * Framework: Robot Framework
 
-* Web: SeleniumLibrary (Chrome, Firefox, Safari)
+* Web: SeleniumLibrary (Chrome e Firefox)
 
 * API: RequestsLibrary (Testes de contrato e funcional)
 
@@ -144,10 +144,15 @@ Após a execução, os resultados são gerados na pasta /results. O Robot Framew
 **Gislaine Oliveira** * | Foco em QA e Automação.*
 
 ## Execução dos testes
-[![Feature WEB]](https://github.com/user-attachments/assets/b536e29f-1a24-4df2-b4a4-e510dc8c08dc)
 
-[![Feature API]]
+* Feature WEB
+<img width="828" height="281" alt="web" src="https://github.com/user-attachments/assets/9d9f6ad5-8999-47c1-a035-91d4b34e79b7" />
 
-[![Git Actions]]
+* Feature API
+<img width="822" height="309" alt="api" src="https://github.com/user-attachments/assets/042cd20f-83ee-4fe5-95d7-837aceb89602" />
 
-[![ Relatório ]]
+* Relatório
+<img width="879" height="734" alt="relatório" src="https://github.com/user-attachments/assets/10ff312e-9f64-4d2b-800a-256a32fc8a46" />
+
+* Git Actions
+<img width="1867" height="962" alt="gitActions" src="https://github.com/user-attachments/assets/dcbec19b-066e-4b29-9a21-e2f2ced3af2d" />
