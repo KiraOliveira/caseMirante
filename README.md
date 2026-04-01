@@ -13,7 +13,8 @@ Este é um case de **Automação WEB** focada na estruturação do Agi Blog. A a
 ## 📂 Estrutura Visual das Pastas
 A organização segue o padrão de separação de responsabilidades para facilitar a manutenção e escalabilidade:
 
-```text
+---
+
 .
 ├── .github/              # Configurações de CI/CD (GitHub Actions)
 │   └── workflows/
@@ -85,3 +86,5 @@ O projeto está configurado para garantir a **compatibilidade cross-browser**. A
 
 ## 👤 Autora
 **Gislaine Oliveira** * | Foco em QA e Automação.*
+
+## Execução dos testes
