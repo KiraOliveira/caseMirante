@@ -11,10 +11,9 @@ ${RACA}        ${None}
 Criar Sessao DogAPI
     Create Session    dog_api    ${BASE_URL}    disable_warnings=1
 
-# --- PASSOS DO BDD ---
-
+### Passo-a-Passo
 Dado que a API Dog está disponível
-    # Apenas semântico para o BDD
+    #Criado semântico para o BDD
     No Operation
 
 Quando eu solicitar a lista de todas as raças
@@ -29,6 +28,7 @@ Quando eu consultar as imagens desta raça
     Set Test Variable    ${RES}
 
 Dado que eu solicite uma imagem aleatória de um cão
+    #Criado semântico para o BDD
     No Operation
 
 Quando a requisição for processada
@@ -46,7 +46,7 @@ Então o status code deve ser ${status_esperado}
     Status Should Be    ${status_esperado}    ${RES}
 
 E a resposta deve conter a lista de raças com o status "${status_msg}"
-    # Validação do JSON: Chaves e Valores
+    # Validando JSON
     Dictionary Should Contain Key    ${RES.json()}    message
     Dictionary Should Contain Key    ${RES.json()}    status
     Should Be Equal As Strings       ${RES.json()}[status]    ${status_msg}
@@ -55,19 +55,19 @@ E a resposta deve conter a lista de raças com o status "${status_msg}"
     Should Be Equal As Strings    ${tipo}    dict
 
 E a lista de imagens não deve estar vazia
-    # Validação do JSON: Se 'message' é uma lista com itens
+    # Validando  JSON: Se 'message' é uma lista com itens
     ${tipo}=    Evaluate    type($RES.json()['message']).__name__
     Should Be Equal As Strings    ${tipo}    list
     ${quantidade}=    Get Length    ${RES.json()}[message]
     Should Be True    ${quantidade} > 0
 
 E o campo "message" deve conter a URL de uma imagem válida
-    # Validação do JSON: Formato da string de imagem
+    # Validando JSON: Formato da string de imagem
     ${url}=    Set Variable    ${RES.json()}[message]
     Should Contain    ${url}    https://images.dog.ceo/breeds/
     Should Match Regexp    ${url}    .*\\.(jpg|jpeg|png)$
 
 E a mensagem de erro deve ser "${msg_erro}"
-    # Validação do JSON de erro
+    # Validando JSON com retorno da mensagem de erro
     Should Be Equal As Strings    ${RES.json()}[message]    ${msg_erro}
     Should Be Equal As Strings    ${RES.json()}[status]     error

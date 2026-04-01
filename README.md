@@ -1,12 +1,16 @@
 # 🛡️ CASE: Automação de Testes - Blog do Agi
 
 **Status do Projeto:** 🚀 Em Execução (CI/CD Ativo)  
-**Objetivo:** Validar a funcionalidade de busca do Blog do Agi em múltiplos ambientes e navegadores.
+**Objetivo:** Automação de testes abrangendo testes de interface (Web) e testes de integração (API), utilizando Robot Framework e Python.
 
 ---
 
-## 📋 Sobre o Projeto
-Este é um case de **Automação WEB** focada na estruturação do Agi Blog. A automação utiliza o **Robot Framework** com a **SeleniumLibrary**, aplicando técnicas de injeção de JavaScript para garantir a estabilidade dos testes em interfaces modernas e dinâmicas (Astra Theme), mitigando erros de sincronismo e visibilidade.
+## 📋 Estrutura do Projeto
+O projeto está dividido em duas frentes principais:
+
+1. Web Automation: Validação de funcionalidades de busca no Blog do Agi.
+
+2. API Automation: Validação de endpoints da Dog API.
 
 ---
 
@@ -15,30 +19,72 @@ A organização segue o padrão de separação de responsabilidades para facilit
 
 ```
 CASEMIRANTE/
-├── .github/              # Configurações de CI/CD (GitHub Actions)
+├── .github/
 │   └── workflows/
-│       └── main.yml      # Pipeline multi-browser (Chrome, Firefox, Safari)
-├── resources/            # Camada de Recursos e Lógica
-│   └── resource.robot    # Keywords personalizadas e variáveis globais
-├── tests/                # Suítes de Teste (Cenários BDD)
-│   └── pesquisa.robot    # Cenários de busca (Parcial, Completo e Negativa)
-├── results/              # Artefatos de execução (Logs, Reports e Screenshots)
-├── requirements.txt      # Gerenciador de dependências Python
-└── README.md             # Documentação técnica do projeto
+│       └── main.yml              # Configuração do Pipeline (CI/CD)
+├── resources/                    # Implementação técnica (Keywords)
+│   ├── resourceAPI.robot         # Lógica dos testes de API
+│   └── resourceWEB.robot         # Lógica dos testes de Web
+├── tests/                        # Cenários de teste (BDD)
+│   ├── results/                  # Resultados específicos da pasta tests
+│   ├── apiDogTest.robot          # Casos de teste da Dog API
+│   └── pesquisaWEB.robot         # Casos de teste da busca no blog
+├── .gitignore                    # Arquivos que o Git deve ignorar (como a .venv)
+├── README.md                     # Documentação do projeto
+└── requirements.txt              # Bibliotecas necessárias (Selenium, Requests)
 ```
+---
+
+## 📝 Cenários de Teste (BDD)
+
+### 💻 Web (Interface)
+
+Focado na funcionalidade de busca, garantindo a resiliência em diferentes navegadores.
+
+* Cenário 1: Realizar a busca inserindo uma parte do conteúdo de um artigo existente.
+
+* Cenário 2: Realizar a busca com o nome completo de um artigo existente.
+
+* Cenário 3: Realizar a busca com um dado que não existe.
+
+### ⚙️ API (Integração)
+
+Validação detalhada de estruturas JSON e Status Codes.
+
+* GET /breeds/list/all: Valida a árvore completa de raças (Type: dict).
+
+* GET /breed/{breed}/images: Valida o retorno de listas de imagens (Type: list).
+
+* GET /breeds/image/random: Valida o formato da URL de imagem retornada (Regex).
+
+* Fluxo de Exceção: Valida mensagens de erro para raças inexistentes (404).
+
 ---
 
 ### Requisitos e Execução
 
-## 🛠️ Requisitos e Instalação
+## 🛠️ Tecnologias e Bibliotecas
+* Linguagem: Python 3.10+
 
-### 1. Pré-requisitos
-* **Python 3.10+** (Instalado e configurado no PATH).
-* **Google Chrome** (Navegador padrão para execução local no Linux/Windows).
-* **WebDriver Manager** (Biblioteca que gerencia automaticamente os drivers).
+* Framework: Robot Framework
 
-### 2. Instalação das Dependências
+* Web: SeleniumLibrary (Chrome, Firefox, Safari)
+
+* API: RequestsLibrary (Testes de contrato e funcional)
+
+* CI/CD: GitHub Actions (Execução multi-OS: Linux, Windows e macOS)
+
+---
+
+### ⚙️ Configuração do Ambiente
 No terminal, execute:
+
+1. Clone o repositório:
+
+```bash
+git clone git@github.com:KiraOliveira/caseMirante.git
+```
+2. Instale as dependências:
 
 ```bash
 pip install -r requirements.txt
@@ -49,6 +95,7 @@ pip install -r requirements.txt
 
 * Execução Local (Interface Gráfica)
 
+### API e WEB
 ```bash
 robot -d results tests/
 ```
@@ -61,28 +108,35 @@ robot -d results -v BROWSER:headlesschrome tests/
 
 * Execução de Cenário Específico (Por Tag)
 
+### WEB
 ```bash
 robot -d results -i busca_parcial tests/
 ```
 
----
-
-## ⚙️ Pipeline de CI/CD (GitHub Actions)
-O projeto está configurado para garantir a **compatibilidade cross-browser**. A cada `push` ou `pull request`, o GitHub Actions dispara execuções paralelas em diferentes sistemas operacionais:
-
-| Navegador | OS Runner | Motor de Renderização |
-| :--- | :--- | :--- |
-| **Google Chrome** | `ubuntu-latest` | Blink/Chromium |
-| **Mozilla Firefox** | `ubuntu-latest` | Gecko |
-| **Apple Safari** | `macos-latest` | WebKit |
+### API
+```bash
+robot -d results -i listar_todas tests/
+```
 
 ---
 
-## 💡 Diferenciais Técnicos (Nível Pleno)
-* **Tratamento de Stale Elements:** Uso de `Execute Javascript` para manipulação direta do DOM, garantindo a inserção de dados mesmo durante animações.
-* **Resiliência em Linux:** Configurações específicas (`--no-sandbox` e `--disable-dev-shm-usage`) para execução estável em containers.
-* **Otimização:** Uso de `Suite Setup` para reaproveitamento de instâncias do navegador.
-* **Evidências:** Captura de screenshots com nomenclatura dinâmica.
+## ⚙️ Integração Contínua CI/CD (GitHub Actions)
+O projeto utiliza GitHub Actions para garantir a qualidade em cada push. O pipeline está configurado para:
+
+* Executar testes de API em ambiente Linux.
+
+* Executar testes de UI em Matrix (Chrome e Firefox) nos sistemas Ubuntu, Windows e macOS.
+
+* Fazer o upload automático dos relatórios (log.html e report.html) e evidências (Screenshots) como artefatos da build.
+
+---
+
+## 📊 Relatórios
+Após a execução, os resultados são gerados na pasta /results. O Robot Framework fornece:
+
+* Log.html: Detalhamento técnico (passo a passo, requisições HTTP e erros).
+
+* Report.html: Visão executiva de sucesso/falha por tag e cenário.
 
 ---
 
@@ -91,3 +145,9 @@ O projeto está configurado para garantir a **compatibilidade cross-browser**. A
 
 ## Execução dos testes
 [![Feature WEB]]<img width="708" height="367" alt="webLocal" src="https://github.com/user-attachments/assets/b536e29f-1a24-4df2-b4a4-e510dc8c08dc" />
+
+[![Feature API]]
+
+[![Git Actions]]
+
+[![ Relatório ]]

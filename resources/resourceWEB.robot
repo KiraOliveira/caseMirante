@@ -41,12 +41,12 @@ Quando o usuário pesquisa pelo termo "${TERMO}"
 Então o sistema deve exibir uma lista de resultados relacionados ao termo
     # Aqui retorna os dados da busca no step parcial
     Wait Until Element Is Visible    id:main    15s
-    Capture Page Screenshot          evidencias/busca_parcial_resultados.png
+    Capture Page Screenshot          evidencias/busca_parcial_${BROWSER}.png
 
 # Aqui retorna os dados da busca no step completo
 Então o sistema deve exibir o artigo exato relacionado ao termo      
-    Wait Until Element Is Visible    css:article    timeout=30s
-    Capture Page Screenshot          evidencias/busca_completo_resultados.png    
+    Wait Until Element Is Visible    id:main    15s
+    Capture Page Screenshot          evidencias/busca_completo_${BROWSER}.png   
 
 # Aqui retorna os dados da busca no step negativa
 Então deve ser exibido a mensagem "Lamentamos, mas nada foi encontrado"

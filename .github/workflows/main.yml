@@ -1,4 +1,4 @@
-name: Pipeline de Testes Multi-OS (QA)
+name: Pipeline de Testes Integrados (UI & API)
 
 on:
   push:
@@ -7,10 +7,38 @@ on:
     branches: [ main, master ]
 
 jobs:
-  robot-tests:
-    name: ${{ matrix.browser }} no ${{ matrix.os }}
+  # JOB 1: Testes de API (Rápido e Direto)
+  api-tests:
+    name: Testes de API (Dog API)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do Código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalar Dependências
+        run: |
+          pip install robotframework robotframework-requests
+
+      - name: Executar Testes de API
+        run: |
+          robot -d results/api tests/apiDogTest.robot
+
+      - name: Upload Relatório API
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-api
+          path: results/api
+
+  # JOB 2: Testes de Interface (Sua Matrix de Multi-OS)
+  ui-tests:
+    name: UI ${{ matrix.browser }} no ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    
     strategy:
       fail-fast: false
       matrix:
@@ -21,25 +49,23 @@ jobs:
       - name: Checkout do Código
         uses: actions/checkout@v4
 
-      - name: Configurar Python 3.10
+      - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
       - name: Instalar Dependências
         run: |
-          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Executar Testes Robot
-        # No Windows usamos shell diferente, mas o comando do Robot é universal
+      - name: Executar Testes de UI
         run: |
-          robot -d results -v BROWSER:headless${{ matrix.browser }} tests/
+          robot -d results/ui -v BROWSER:headless${{ matrix.browser }} tests/pesquisaWEB.robot
         shell: bash
 
-      - name: Upload de Evidências (Screenshots e Reports)
+      - name: Upload Relatório UI
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: relatorio-${{ matrix.browser }}-${{ matrix.os }}
-          path: results/
+          name: relatorio-ui-${{ matrix.browser }}-${{ matrix.os }}
+          path: results/ui
