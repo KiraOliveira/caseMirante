@@ -1,4 +1,4 @@
-name: Pipeline de Testes Multi-Browser (QA)
+name: Pipeline de Testes Multi-OS (QA)
 
 on:
   push:
@@ -7,21 +7,15 @@ on:
     branches: [ main, master ]
 
 jobs:
-  tests:
-    name: Testar no ${{ matrix.browser }} (${{ matrix.os }})
+  robot-tests:
+    name: ${{ matrix.browser }} no ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     
     strategy:
-      # Garante que um erro em um navegador não cancele os outros
       fail-fast: false
       matrix:
-        include:
-          - os: ubuntu-latest
-            browser: chrome
-          - os: ubuntu-latest
-            browser: firefox
-          - os: macos-latest
-            browser: safari
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        browser: [chrome, firefox]
 
     steps:
       - name: Checkout do Código
@@ -37,15 +31,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Executar Testes Robot (Chrome/Firefox - Linux)
-        if: matrix.os == 'ubuntu-latest'
+      - name: Executar Testes Robot
+        # No Windows usamos shell diferente, mas o comando do Robot é universal
         run: |
           robot -d results -v BROWSER:headless${{ matrix.browser }} tests/
-
-      - name: Executar Testes Robot (Safari - MacOS)
-        if: matrix.os == 'macos-latest'
-        run: |
-          robot -d results -v BROWSER:${{ matrix.browser }} tests/
+        shell: bash
 
       - name: Upload de Evidências (Screenshots e Reports)
         if: always()
