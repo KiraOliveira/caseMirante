@@ -90,4 +90,4 @@ O projeto está configurado para garantir a **compatibilidade cross-browser**. A
 **Gislaine Oliveira** * | Foco em QA e Automação.*
 
 ## Execução dos testes
-[![Feature WEB]<img width="708" height="367" alt="webLocal" src="https://github.com/user-attachments/assets/b536e29f-1a24-4df2-b4a4-e510dc8c08dc" />
+[![Feature WEB]]<img width="708" height="367" alt="webLocal" src="https://github.com/user-attachments/assets/b536e29f-1a24-4df2-b4a4-e510dc8c08dc" />

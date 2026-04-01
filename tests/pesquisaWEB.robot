@@ -1,5 +1,5 @@
 *** Settings ***
-Resource         ../resources/resource.robot
+Resource         ../resources/resourceWEB.robot
 Test Setup       Abrir o blog do Agi
 Test Teardown    Fechar o navegador
 
