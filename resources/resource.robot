@@ -4,13 +4,16 @@ Library    SeleniumLibrary
 *** Variables ***
 ${BROWSER}           chrome
 ${URL}               https://blogdoagi.com.br/
-${MENSAGEM_ERRO}     xpath=//p[contains(normalize-space(), 'Lamentamos, mas nada foi encontrado')]
+${MENSAGEM_ERRO}     xpath=//p[contains(text(), 'Lamentamos, mas nada foi encontrado')]
 
 *** Keywords ***
 ### Setup e Teardown 
 Abrir o blog do Agi
-    Open Browser    ${URL}    ${BROWSER}
-    Maximize Browser Window
+    Open Browser                ${URL}    ${BROWSER}
+    Set Window Size             1920      1080
+
+    Set Selenium Timeout        30s
+    Set Selenium Implicit Wait  10s
 
 Fechar o navegador
     Capture Page Screenshot
@@ -47,6 +50,7 @@ Então o sistema deve exibir o artigo exato relacionado ao termo
 
 # Aqui retorna os dados da busca no step negativa
 Então deve ser exibido a mensagem "Lamentamos, mas nada foi encontrado"
-    Wait Until Element Is Visible    ${MENSAGEM_ERRO}        15s
-    Element Should Be Visible        ${MENSAGEM_ERRO}
-    Capture Page Screenshot          evidencias/busca_negativa_resultados.png
+    Wait Until Page Contains            Lamentamos, mas nada foi encontrado        timeout=30s
+    Wait Until Element Is Visible       css=section.no-results    timeout=10s   
+    Element Should Be Visible           ${MENSAGEM_ERRO}
+    Capture Page Screenshot             evidencias/busca_negativa_resultados.png
