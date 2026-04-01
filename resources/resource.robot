@@ -47,6 +47,6 @@ Então o sistema deve exibir o artigo exato relacionado ao termo
 
 # Aqui retorna os dados da busca no step negativa
 Então deve ser exibido a mensagem "Lamentamos, mas nada foi encontrado"
-    Wait Until Element Is Visible    ${MENSAGEM_ERRO}    timeout=15s
+    Wait Until Element Is Visible    ${MENSAGEM_ERRO}        15s
     Element Should Be Visible        ${MENSAGEM_ERRO}
     Capture Page Screenshot          evidencias/busca_negativa_resultados.png
