@@ -13,9 +13,8 @@ Este é um case de **Automação WEB** focada na estruturação do Agi Blog. A a
 ## 📂 Estrutura Visual das Pastas
 A organização segue o padrão de separação de responsabilidades para facilitar a manutenção e escalabilidade:
 
----
-
-.
+```
+CASEMIRANTE/
 ├── .github/              # Configurações de CI/CD (GitHub Actions)
 │   └── workflows/
 │       └── main.yml      # Pipeline multi-browser (Chrome, Firefox, Safari)
@@ -26,7 +25,7 @@ A organização segue o padrão de separação de responsabilidades para facilit
 ├── results/              # Artefatos de execução (Logs, Reports e Screenshots)
 ├── requirements.txt      # Gerenciador de dependências Python
 └── README.md             # Documentação técnica do projeto
-
+```
 ---
 
 ### Requisitos e Execução
@@ -43,7 +42,7 @@ No terminal, execute:
 
 ```bash
 pip install -r requirements.txt
-
+```
 ---
 
 ## 🚀 Execução dos Testes
@@ -52,16 +51,19 @@ pip install -r requirements.txt
 
 ```bash
 robot -d results tests/
+```
 
 * Execução em Modo Headless (Ideal para Linux)
 
 ```bash
 robot -d results -v BROWSER:headlesschrome tests/
+```
 
 * Execução de Cenário Específico (Por Tag)
 
 ```bash
 robot -d results -i busca_parcial tests/
+```
 
 ---
 
